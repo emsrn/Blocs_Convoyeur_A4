@@ -314,9 +314,79 @@ namespace convoyeur {
         setText(0, 0);
     }
 
-    //%block="Allumer LED"
-    //%group='Anneau lumineux'
-    export function ledsON(){
-        pins.analogWritePin(AnalogPin.P8,1023)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    export enum DigitalRJPin {
+        //% block="J1" 
+        J1,
+        //% block="J2"
+        J2,
+        //% block="J3"
+        J3,
+        //% block="J4"
+        J4
     }
+
+    export enum NeoPixelColors {
+        //% block=rouge
+        Red = 0x00FF00,
+        //% block=vert
+        Green = 0xFF0000,
+        //% block=bleu
+        Blue = 0x0000FF,
+        //% block=blanc
+        White = 0xFFFFFF,
+        //% block=noir
+        Black = 0x000000
+    }
+
+    export class Strip {
+        buf: Buffer;
+        pin: DigitalPin;
+        _length: number;
+
+        constructor(numleds: number, pin: DigitalPin) {
+            this._length = numleds;
+            this.pin = pin;
+            this.buf = pins.createBuffer(numleds * 3); // RGB simple
+        }
+
+        showColor(rgb: number) {
+            for (let i = 0; i < this._length; i++) {
+                this.buf[i * 3 + 0] = (rgb >> 16) & 0xFF; // R
+                this.buf[i * 3 + 1] = (rgb >> 8) & 0xFF;  // G
+                this.buf[i * 3 + 2] = rgb & 0xFF;         // B
+            }
+            ws2812b.sendBuffer(this.buf, this.pin);
+        }
+
+        allOn() {
+            this.showColor(NeoPixelColors.White);
+        }
+    }
+
+    function create(pin: DigitalPin): Strip {
+        let numleds=8
+        return new Strip(numleds, pin);
+    }
+
+    //% block="Allumer l'anneau en %color"
+    //% group='Anneau lumineux'
+    export function setRingColor(color: NeoPixelColors) {
+        let strip = create(DigitalPin.P8)
+        strip.showColor(color)
+    }
+
 }

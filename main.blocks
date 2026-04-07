@@ -1,1 +1,1 @@
-<xml xmlns="https://developers.google.com/blockly/xml"><variables></variables><block type="pxt-on-start" id=",D6I~}IaY)#m]-MPXILk" x="0" y="0"></block><block type="device_forever" id="|Wu(wH{3nEE-Amvi;_9|" x="263" y="227"></block></xml>
+<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="dSp0oY^X$N]|-M3_xRJw">strip</variable><variable id="XBF3PKSJ!h#0ef`B]h3C">strip2</variable></variables></xml>
