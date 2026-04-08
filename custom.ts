@@ -367,7 +367,8 @@ namespace convoyeur {
                 this.buf[i * 3 + 2] = Math.floor(b * scale);
             }
 
-            ws2812b.sendBuffer(this.buf, this.pin);
+            // Utilisation de la fonction native de la micro:bit sans l'extension Neopixel "ws2812b.sendBuffer(this.buf, this.pin);"
+            light.sendWS2812Buffer(this.buf, this.pin); 
         }
 
         allOn() {
@@ -376,13 +377,12 @@ namespace convoyeur {
     }
 
     function create(pin: DigitalPin): Strip {
-        let numleds=8
-        return new Strip(numleds, pin);
+        return new Strip(8, pin); 
     }
 
     //% block="Changer la couleur de l'anneau en %color"
     //% group='Anneau lumineux'
-    export function setRingColor(color: NeoPixelColors) {
+    export function setRingColor(color: Colors) {
         let strip = create(DigitalPin.P8)
         strip.showColor(color)
     }
@@ -402,8 +402,5 @@ namespace convoyeur {
         let color = Colors.Black
         strip.showColor(color)
     }
-
-
-    
 
 }
