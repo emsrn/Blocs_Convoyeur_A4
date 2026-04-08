@@ -315,17 +315,7 @@ namespace convoyeur {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
+/////// Anneau de LEDs /////// 
 
 
     export enum DigitalRJPin {
@@ -339,16 +329,16 @@ namespace convoyeur {
         J4
     }
 
-    export enum NeoPixelColors {
+    export enum Colors {
         //% block=rouge
         Red = 0x00FF00,
         //% block=vert
         Green = 0xFF0000,
         //% block=bleu
         Blue = 0x0000FF,
-        //% block=blanc
+        //% block=blanc 
         White = 0xFFFFFF,
-        //% block=noir
+        //% block=noir 
         Black = 0x000000
     }
 
@@ -364,16 +354,24 @@ namespace convoyeur {
         }
 
         showColor(rgb: number) {
+            let r = (rgb >> 16) & 0xFF;
+            let g = (rgb >> 8) & 0xFF;
+            let b = rgb & 0xFF;
+
+            // luminosité fixée à 25
+            let scale = 25 / 255;
+
             for (let i = 0; i < this._length; i++) {
-                this.buf[i * 3 + 0] = (rgb >> 16) & 0xFF; // R
-                this.buf[i * 3 + 1] = (rgb >> 8) & 0xFF;  // G
-                this.buf[i * 3 + 2] = rgb & 0xFF;         // B
+                this.buf[i * 3 + 0] = Math.floor(r * scale);
+                this.buf[i * 3 + 1] = Math.floor(g * scale);
+                this.buf[i * 3 + 2] = Math.floor(b * scale);
             }
+
             ws2812b.sendBuffer(this.buf, this.pin);
         }
 
         allOn() {
-            this.showColor(NeoPixelColors.White);
+            this.showColor(Colors.White);
         }
     }
 
@@ -382,11 +380,30 @@ namespace convoyeur {
         return new Strip(numleds, pin);
     }
 
-    //% block="Allumer l'anneau en %color"
+    //% block="Changer la couleur de l'anneau en %color"
     //% group='Anneau lumineux'
     export function setRingColor(color: NeoPixelColors) {
         let strip = create(DigitalPin.P8)
         strip.showColor(color)
     }
+
+    //% block="Allumer l'anneau"
+    //% group= 'Anneau lumineux'
+    export function lightsON(){
+        let strip = create(DigitalPin.P8)
+        let color = Colors.White
+        strip.showColor(color)
+    }
+
+    //% block="Eteindre l'anneau"
+    //% group= 'Anneau lumineux'
+    export function lightsOFF() {
+        let strip = create(DigitalPin.P8)
+        let color = Colors.Black
+        strip.showColor(color)
+    }
+
+
+    
 
 }
