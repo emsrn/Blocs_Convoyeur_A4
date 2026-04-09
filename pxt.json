@@ -11,7 +11,7 @@
         "main.blocks",
         "main.ts",
         "README.md",
-        "custom.ts", 
+        "custom.ts",
         "_locales/fr/pxt-convoyeur-a4-strings.json"
         
     ],
