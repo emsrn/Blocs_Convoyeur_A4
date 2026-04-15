@@ -362,9 +362,6 @@ namespace convoyeur {
             light.sendWS2812Buffer(this.buf, this.pin);
         }
 
-        allOn() {
-            this.showColor(Colors.White);
-        }
     }
 
     function create(pin: DigitalPin): Strip {
