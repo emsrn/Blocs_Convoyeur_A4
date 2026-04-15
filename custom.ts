@@ -320,18 +320,6 @@ namespace convoyeur {
 
     /////// Anneau de LEDs /////// 
 
-
-    export enum DigitalRJPin {
-        //% block="J1" 
-        J1,
-        //% block="J2"
-        J2,
-        //% block="J3"
-        J3,
-        //% block="J4"
-        J4
-    }
-
     export enum Colors {
         //% block=rouge
         Red = 0x00FF00,
