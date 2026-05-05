@@ -18,10 +18,7 @@
   "convoyeur.buttonPressed|block": "Button %button pressed",
   "convoyeur.cameraImage|block": "Get one image from AI-Lens",
   "convoyeur.colorCheck|block": "Image contains color : %status",
-  "convoyeur.initModule|block": "Initialize AI-Lens", 
-
-
-
+  "convoyeur.initModule|block": "Initialize AI-Lens",
   "convoyeur.learnObject|block": "Learn object with : %thingsID",
   "convoyeur.lightsOFF|block": "Lights off",
   "convoyeur.objectCheck|block": "Image contains learned objects : %status",
