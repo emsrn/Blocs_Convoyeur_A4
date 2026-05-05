@@ -35,7 +35,7 @@
   "convoyeur.stopMotor|block": "Stop motor",
   "convoyeur.switchfunc|block": "Switch function as %fun",
   "convoyeur|block": "convoyeur",
-  "{id:category}Convoyeur": "Convoyeur",
+  "{id:category}Conveyor": "Conveyor",
   "{id:group}Basics": "Basics",
   "{id:group}Colors": "Colors",
   "{id:group}Learn": "Learn",
