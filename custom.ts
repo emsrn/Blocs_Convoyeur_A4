@@ -6,11 +6,11 @@ enum ButtonChoice { // définition des valeurs possibles pour le choix du BP
 }
 
 //% weight=100 color=#EB8AEB icon="\u26a1"
-//% groups="['Boutons Poussoirs', 'Potentiomètre', 'Moteur', 'Servomoteur', 'Ecran OLED', 'Anneau lumineux']"
+//% groups="['Push Buttons', 'Potentiometer', 'Motor', 'Servomotor', 'OLED Screen', 'Light ring']"
 namespace convoyeur {
 
-    //%block="Lorsque bouton %button est appuyé"
-    //%group='Boutons Poussoirs'
+    //%block="On button %button pressed"
+    //%group='Push Buttons'
     export function onButtonPressed(button: ButtonChoice, handler: () => void) {
         if (button == ButtonChoice.A) {
             input.onButtonPressed(Button.A, handler)
@@ -34,8 +34,8 @@ namespace convoyeur {
         }
     }
 
-    //%block="Bouton %button appuyé" 
-    //%group='Boutons Poussoirs'
+    //%block="Button %button pressed" 
+    //%group='Push Buttons'
     export function buttonPressed(button: ButtonChoice): boolean {
         if (button == ButtonChoice.A) {
             return input.buttonIsPressed(Button.A)
@@ -48,14 +48,14 @@ namespace convoyeur {
         }
     }
 
-    //%group='Potentiomètre' color=#E67E91
-    //%block="Valeur potentiomètre en pourcentage"
+    //%group='Potentiometer' color=#E67E91
+    //%block="Potentiometer in percentage"
     export function potentiometerValue() {
         return pins.analogReadPin(AnalogPin.P2) / 1023 * 100
     }
 
-    //%group='Moteur' color=#86D17B
-    //%block="Activer le moteur à la vitesse %speed \\%"
+    //%group='Motor' color=#86D17B
+    //%block="Run the motor at speed %speed \\%"
     //%speed.min=0 speed.max=100 speed.defl=50 
     export function setMotorSpeed(speed: number) {
         let safeSpeed = Math.max(0, Math.min(100, speed)); //fonction Math.max empêche d'entrer une valeur en dehors de [0;100]
@@ -64,16 +64,16 @@ namespace convoyeur {
         pins.analogWritePin(AnalogPin.P15, pwmValue);
     }
 
-    //%block="Arrêter le moteur"
-    //%group='Moteur' color=#86D17B
+    //%block="Stop motor"
+    //%group='Motor' color=#86D17B
     export function stopMotor() {
         pins.digitalWritePin(DigitalPin.P15, 0)
         pins.digitalWritePin(DigitalPin.P16, 0)
     }
 
 
-    //%block="Fixe l'angle du servo à %angle °"
-    //%group='Servomoteur' color=#6CCAE6
+    //%block="Set servo angle at %angle °"
+    //%group='Servomotor' color=#6CCAE6
     export function setServoAngle(angle: number): void {
         const neZha_address = 0x10
         let iic_buffer = pins.createBuffer(4);
@@ -266,8 +266,8 @@ namespace convoyeur {
 
     //% line.min=1 line.max=8 line.defl=1
     //% text.defl="Hello world !"
-    //%block="Afficher texte %text ligne %line"
-    //%group='Ecran OLED' color=#E6846C
+    //%block="Show text %text line %line"
+    //%group='OLED Screen' color=#E6846C
     export function showUserText(text: string, line: number) {
         if (firstoledinit) {
             oledinit()
@@ -290,8 +290,8 @@ namespace convoyeur {
 
     //% line.min=1 line.max=8 line.defl=2 
     //% n.defl=20200507
-    //%block="Afficher nombre %n ligne %line"
-    //%group='Ecran OLED' color=#E6846C
+    //%block="Show number %n line %line"
+    //%group='OLED Screen' color=#E6846C
     export function showUserNumber(n: number, line: number) {
         if (firstoledinit) {
             oledinit()
@@ -300,8 +300,8 @@ namespace convoyeur {
         showUserText("" + n, line)
     }
 
-    //%block="Effacer l'écran"
-    //%group='Ecran OLED' color=#E6846C
+    //%block="Clear display"
+    //%group='OLED Screen' color=#E6846C
     export function oledClear() {
         //oledcmd(DISPLAY_OFF);   //display off
         for (let j = 0; j < 8; j++) {
@@ -321,15 +321,15 @@ namespace convoyeur {
     /////// Anneau de LEDs /////// 
 
     export enum Colors {
-        //% block=rouge
+        //% block=red
         Red = 0x00FF00,
-        //% block=vert
+        //% block=green
         Green = 0xFF0000,
-        //% block=bleu
+        //% block=blue
         Blue = 0x0000FF,
-        //% block=blanc 
+        //% block=white 
         White = 0xFFFFFF,
-        //% block=noir 
+        //% block=black
         Black = 0x000000
     }
 
@@ -368,8 +368,8 @@ namespace convoyeur {
         return new Strip(8, pin);
     }
 
-    //% block="Allumer l'anneau en %color"
-    //% group='Anneau lumineux' 
+    //% block="Lights on in %color"
+    //% group='Light ring' 
     //% color=#D9BA75
     export function setRingColor(color: Colors) {
         let strip = create(DigitalPin.P8)
@@ -377,8 +377,8 @@ namespace convoyeur {
     }
 
 
-    //% block="Eteindre l'anneau"
-    //% group= 'Anneau lumineux'
+    //% block="Lights off"
+    //% group= 'Light ring'
     //% color=#D9BA75
     export function lightsOFF() {
         let strip = create(DigitalPin.P8)
@@ -393,8 +393,8 @@ namespace convoyeur {
      * @param blue value of the blue channel between 0 and 255. eg: 255
      */
     //% color=#D9BA75
-    //% block="Allumer anneau en rouge %red|vert %green|bleu %blue"
-    //% group='Anneau lumineux'
+    //% block="Turn on the lights in red %red|green %green|blue %blue"
+    //% group='Light ring'
     export function rgb(red: number, green: number, blue: number) {
         let strip = create(DigitalPin.P8)
         strip.showColor(packRGB(red, green, blue));
@@ -408,7 +408,7 @@ namespace convoyeur {
 
     /////// Caméra IA /////// 
 
-    //% groups='Caméra IA' 
+    //% groups='AI Camera' 
     //% advanced=true
     //% weight=100 
     const CameraAdd = 0X14;
@@ -416,33 +416,33 @@ namespace convoyeur {
 
 
     export enum FuncList {
-        //% block="Reconnaissance de couleur"
+        //% block="Color recognition"
         Color = 9,
-        //% block="Apprendre un objet"
+        //% block="Learn an object"
         Things = 10
     }
 
     export enum Colorstatus {
-        //% block="Niveau de confiance"
+        //% block="Confidence level"
         Confidence = 6,
-        //% block="ID couleur"
+        //% block="Color ID"
         ID = 8
     }
     /**
     * Status List of Color
     */
     export enum ColorLs {
-        //% block="Noir"
+        //% block="Black"
         black = 4,
-        //% block="Bleu"
+        //% block="Blue"
         blue = 2,
-        //% block="Vert"
+        //% block="Green"
         green = 1,
-        //% block="Rouge"
+        //% block="Red"
         red = 5,
-        //% block="Blanc"
+        //% block="White"
         white = 6,
-        //% block="Jaune"
+        //% block="Yellow"
         yellow = 3
     }
 
@@ -457,8 +457,8 @@ namespace convoyeur {
     /**
     * TODO: Waiting for module initialize.
     */
-    //% block="Initialiser AI-Lens"
-    //% group="Basiques" weight=100 subcategory="Caméra IA" 
+    //% block="Initialize AI-Lens"
+    //% group="Basics" weight=100 subcategory="AI Camera" 
     //% color=#79C9A9
     export function initModule(): void {
         let timeout = input.runningTime()
@@ -474,10 +474,10 @@ namespace convoyeur {
     * TODO: Switch recognition objects.
     * @param fun Function list 
     */
-    //% block="Définir caméra en %fun"
+    //% block="Switch function as %fun"
     //% fun.fieldEditor="gridpicker"
     //% fun.fieldOptions.columns=3
-    //% group="Basiques" weight=95 subcategory="Caméra IA" 
+    //% group="Basics" weight=95 subcategory="AI Camera" 
     //% color=#79C9A9
     export function switchfunc(fun: FuncList): void {
         let funcBuff = pins.i2cReadBuffer(CameraAdd, 9)
@@ -489,8 +489,8 @@ namespace convoyeur {
     /**
     * TODO: Get the image in a frame
     */
-    //% block="Obtenir une image de AI-Lens"
-    //% group="Basiques" weight=90 subcategory="Caméra IA"
+    //% block="Get one image from AI-Lens"
+    //% group="Basics" weight=90 subcategory="AI Camera"
     //% color=#79C9A9
     export function cameraImage(): void {
         DataBuff = pins.i2cReadBuffer(CameraAdd, 9)
@@ -501,10 +501,10 @@ namespace convoyeur {
     * TODO: Judge whether there is a color in the screen
     * @param status ColorLs
     */
-    //% block="Image contient la couleur : %status"
+    //% block="Image contains color : %status"
     //% status.fieldEditor="gridpicker"
     //% status.fieldOptions.columns=3
-    //% group="Couleurs" weight=30 subcategory="Caméra IA" 
+    //% group="Colors" weight=30 subcategory="AI Camera" 
     //% color=#79C9A9
     export function colorCheck(status: ColorLs): boolean {
         if (DataBuff[0] == 9) {
@@ -519,10 +519,10 @@ namespace convoyeur {
     * TODO: Learn an object in a picture
     * @param thingsID Edit a label for the object
     */
-    //% block="Apprendre un objet avec : %thingsID"
+    //% block="Learn object with : %thingsID"
     //% status.fieldEditor="gridpicker"
     //% status.fieldOptions.columns=3
-    //% group="Apprendre" weight=20 subcategory="Caméra IA" 
+    //% group="Learn" weight=20 subcategory="AI Camera" 
     //% color=#79C9A9
     export function learnObject(thingsID: learnID): void {
         let thingsBuf = pins.createBuffer(9)
@@ -533,8 +533,8 @@ namespace convoyeur {
     /**
     * TODO: Clear Learned Objects
     */
-    //% block="Effacer objets appris"
-    //% group="Apprendre" weight=15 subcategory="Caméra IA" 
+    //% block="Clear learned objects"
+    //% group="Learn" weight=15 subcategory="AI Camera" 
     //% color=#79C9A9
     export function ClearlearnObject(): void {
         let thingsBuf = pins.createBuffer(9)
@@ -545,10 +545,10 @@ namespace convoyeur {
     /**
     * TODO: Judge whether there are any learned objects in the picture
     */
-    //% block="Image contient des objets appris : %status"
+    //% block="Image contains learned objects : %status"
     //% status.fieldEditor="gridpicker"
     //% status.fieldOptions.columns=3
-    //% group="Apprendre" weight=14 subcategory="Caméra IA" 
+    //% group="Learn" weight=14 subcategory="AI Camera" 
     //% color=#79C9A9
     export function objectCheck(status: learnID): boolean {
         if (DataBuff[0] == 10 && status == DataBuff[1]) {
@@ -565,8 +565,8 @@ namespace convoyeur {
     /**
     * TODO: Judge whether there are any learned objects in the picture
     */
-    //% block="Niveau de confiance de l'objet %thingsID appris"
-    //% group="Apprendre" weight=10 subcategory="Caméra IA" 
+    //% block="Learned object %thingsID confidence level"
+    //% group="Learn" weight=10 subcategory="AI Camera" 
     //% color=#79C9A9
     export function objectConfidence(thingsID: learnID): number {
         if (DataBuff[0] == 10 && DataBuff[2] < 30) {
