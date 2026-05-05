@@ -1,6 +1,6 @@
 {
     "name": "convoyeur-a4",
-    "description": "Extension pour maquette Convoyeur de tri IA",
+    "description": "",
     "dependencies": {
         "core": "*",
         "radio": "*",
@@ -11,14 +11,13 @@
         "main.ts",
         "README.md",
         "custom.ts",
-	"blocs_convoyeur_a4\_locales\en\convoyeur-a4-jsdoc-strings.json",
-	"blocs_convoyeur_a4\_locales\en\convoyeur-a4-strings.json",
-	"blocs_convoyeur_a4\_locales\convoyeur-a4-jsdoc-strings.json",
-	"blocs_convoyeur_a4\_locales\convoyeur-a4-strings.json"
+	"_locales\en\convoyeur-a4-jsdoc-strings.json",
+	"_locales\en\convoyeur-a4-strings.json",
+	"_locales\convoyeur-a4-jsdoc-strings.json",
+	"_locales\convoyeur-a4-strings.json"
     ],
     "testFiles": [
         "test.ts"
-
     ],
     "supportedTargets": [
         "microbit"
