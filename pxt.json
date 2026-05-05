@@ -11,10 +11,10 @@
         "main.ts",
         "README.md",
         "custom.ts",
-	"_locales\en\convoyeur-a4-jsdoc-strings.json",
-	"_locales\en\convoyeur-a4-strings.json",
-	"_locales\convoyeur-a4-jsdoc-strings.json",
-	"_locales\convoyeur-a4-strings.json"
+		"_locales/en/convoyeur-a4-jsdoc-strings.json",
+		"_locales/en/convoyeur-a4-strings.json",
+		"_locales/convoyeur-a4-jsdoc-strings.json",
+		"_locales/convoyeur-a4-strings.json"
     ],
     "testFiles": [
         "test.ts"
