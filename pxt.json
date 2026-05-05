@@ -14,7 +14,9 @@
 	"blocs_convoyeur_a4\_locales\en\convoyeur-a4-jsdoc-strings.json",
 	"blocs_convoyeur_a4\_locales\en\convoyeur-a4-strings.json",
 	"blocs_convoyeur_a4\_locales\fr\convoyeur-a4-jsdoc-strings.json",
-	"blocs_convoyeur_a4\_locales\fr\convoyeur-a4-strings.json"
+	"blocs_convoyeur_a4\_locales\fr\convoyeur-a4-strings.json",
+	"blocs_convoyeur_a4\_locales\convoyeur-a4-jsdoc-strings.json",
+	"blocs_convoyeur_a4\_locales\convoyeur-a4-strings.json"
     ],
     "testFiles": [
         "test.ts"
